@@ -25,7 +25,7 @@ public class SetBitCounter {
 	 * 		So this iterates 4 times. 
 	 * 		Each iteration decrements the value in such a way that the least significant bit that is set to 1 disappears.
 	 * 		Decrementing by one flips the lowest bit and every bit up to the first one. e.g. if you have 1000....0000 -1 = 0111....1111 
-	 * 		not matter how many bits it has to flip and it stops there leaving any other bits set untouched. When you and this with n the 
+	 * 		no matter how many bits it has to flip and it stops there leaving any other bits set untouched. When you and this with n the 
 	 * 		lowest bit set and only the lowest bit becomes 0
 	 * </pre>
 	 * 
