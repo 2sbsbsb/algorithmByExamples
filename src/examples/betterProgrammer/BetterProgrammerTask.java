@@ -1,23 +1,31 @@
 package examples.betterProgrammer;
 
-
 public class BetterProgrammerTask {
 
-	 	/**
-		 * @param a
-		 * @return
+	/**
+	 * @param a
+	 * @return
+	 */
+	public static int sumOfTwoLargestElements(int[] a) {
+		/*
+		 * Please implement this method to return the sum of the two largest
+		 * numbers in a given array.
 		 */
-		public static int getClosestToZero(int[] a) {
-			/*
-			 * Please implement this method to return the number in the array that
-			 * is closest to zero. If there are two equally close to zero elements
-			 * like 2 and -2 - consider the positive element to be "closer" to zero.
-			 */
-			int closet = Integer.MAX_VALUE;
-			for (int i = 0; i < a.length; i++) {
-				closet = (Math.abs(a[i]) < Math.abs(closet)) ? a[i] : (Math.abs(a[i]) == Math.abs(closet) && a[i]>0 ? a[i] : closet);					
-			}
-			return closet;
+		int largest = 0;
+		int largest2 = 0;
+		for (int i = 0; i < a.length; i++) {
+			if (a[i] >= largest) {
+				largest2 = largest;
+				largest = a[i];
+			} 
 		}
 
+		return largest + largest2;
+	}
+
+	
+	public static void main(String[] args) {		
+		int[] a = {1,5,6,7,8,8,11};		
+		System.out.println(sumOfTwoLargestElements(a));
+	}
 }
