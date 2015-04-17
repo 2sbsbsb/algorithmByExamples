@@ -1,79 +1,55 @@
 package examples.betterProgrammer;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class BetterProgrammerTask {
 
-    public static int countAlmostPrimeNumbers(int from, int to) {
-        /*
-          A prime number is a natural number that has exactly two distinct natural number divisors,
-          which are 1 and the prime number itself.
-          The first prime numbers are: 2, 3, 5, 7, 11, 13.
+	// Please do not change this interface
+	public static interface Node {
+		int getValue();
 
-          Almost prime numbers are the non-prime numbers
-          which are divisible by only a single prime number.
-
-          Please implement this method to
-          return the number of almost prime numbers within the given range (inclusively).
-         */
-    	int sum = 0;
-    	List<Integer> primes = new ArrayList<Integer>();
-		for (int i = from; i <= to; i++) {
-			boolean isNotPrime = isNotPrime(i);
-			if (!isNotPrime) {
-				primes.add(i);
-			} else {
-			if(isAlmostPrime(i,primes)) {
-				sum+=i;
-			}
-			}
-		}		
-		return sum;		
-    }
-    
-    /**
-     * @param i
-     * @param primes
-     * @return
-     */
-    private static boolean isAlmostPrime(int i, List<Integer> primes) {
-    	int count =0;
-		for(Integer p : primes) {
-			if(i%p==0){
-				count++;
-			}
-		}
-		return count==1;
+		List<Node> getChildren();
 	}
 
 	/**
-	 * @param i
-	 * @return
+	 * Created a class to hold the count of node and sum;
 	 */
-	private static boolean isNotPrime(int i) {
-		boolean result = false;		
-		if(i==1) {
-			return true;
-		}
-		if(i==2 || i==3) {
-			return false;
-		}
-		for(int j=2; j<=i; j++) {
-			if(i!=j && i%j==0) {
-				result = true;
-				break;
-			}
-		}
-		return result;
-	}
- 
+	public static class NodeCount {
+		int count;
+		int sum;
 
+		public void add(int value) {
+			count++;
+			sum += value;
+		}
+
+		public double avg() {
+			return sum / (double) count;
+		}
+	}
 
 	/**
-	 * @param args
+	 * @param nc
+	 * @param root
 	 */
-	public static void main(String[] args) {
-		System.out.println(countAlmostPrimeNumbers(1,10));	
+	public static void updateCount(NodeCount nc, Node root) {
+		nc.add(root.getValue());
+		List<Node> kids = root.getChildren();
+		if (kids != null) {
+			for (Node kid : kids) {
+				updateCount(nc, kid);
+			}
+		}
 	}
+
+	public static double getAverage(Node root) {
+		/*
+		 * Please implement this method to return the average of all node values
+		 * (Node.getValue()) in the tree.
+		 */
+		NodeCount nc = new NodeCount();
+		updateCount(nc, root);
+		return nc.avg();
+	}
+
 }
