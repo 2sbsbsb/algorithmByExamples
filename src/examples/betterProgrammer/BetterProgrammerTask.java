@@ -1,31 +1,36 @@
 package examples.betterProgrammer;
 
+import java.util.*;
+
 public class BetterProgrammerTask {
 
-	/**
-	 * @param a
-	 * @return
-	 */
-	public static int sumOfTwoLargestElements(int[] a) {
-		/*
-		 * Please implement this method to return the sum of the two largest
-		 * numbers in a given array.
-		 */
-		int largest = 0;
-		int largest2 = 0;
-		for (int i = 0; i < a.length; i++) {
-			if (a[i] >= largest) {
-				largest2 = largest;
-				largest = a[i];
-			} 
-		}
+	 // Please do not change this interface
+    public static interface Node {
+        int getValue();
+        List<Node> getChildren();
+    }
 
-		return largest + largest2;
-	}
+
+    /**
+     * @param root
+     * @return
+     */
+    public static List<Node> traverseTreeInDepth(Node root) {
+        /*
+          Please implement this method to
+          traverse the tree in depth and return a list of all passed nodes.
+          The method shall work optimally with large trees.
+         */
+    	List<Node> results = new ArrayList<Node>();
+    	List<Node> childrens = root.getChildren();
+    	results.add(root);
+    	if(childrens!=null && childrens.size()>0) {
+    		for(Node node : childrens) {    			
+    			results.addAll(traverseTreeInDepth(node));
+    		}
+    	}    	
+    	return results;
+    }
 
 	
-	public static void main(String[] args) {		
-		int[] a = {1,5,6,7,8,8,11};		
-		System.out.println(sumOfTwoLargestElements(a));
-	}
 }
