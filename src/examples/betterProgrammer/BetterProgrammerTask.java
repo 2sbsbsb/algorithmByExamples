@@ -1,55 +1,23 @@
 package examples.betterProgrammer;
 
-import java.util.*;
 
 public class BetterProgrammerTask {
 
-	// Please do not change this interface
-	public static interface Node {
-		int getValue();
-
-		List<Node> getChildren();
-	}
-
-	/**
-	 * Created a class to hold the count of node and sum;
-	 */
-	public static class NodeCount {
-		int count;
-		int sum;
-
-		public void add(int value) {
-			count++;
-			sum += value;
-		}
-
-		public double avg() {
-			return sum / (double) count;
-		}
-	}
-
-	/**
-	 * @param nc
-	 * @param root
-	 */
-	public static void updateCount(NodeCount nc, Node root) {
-		nc.add(root.getValue());
-		List<Node> kids = root.getChildren();
-		if (kids != null) {
-			for (Node kid : kids) {
-				updateCount(nc, kid);
-			}
-		}
-	}
-
-	public static double getAverage(Node root) {
-		/*
-		 * Please implement this method to return the average of all node values
-		 * (Node.getValue()) in the tree.
+	 	/**
+		 * @param a
+		 * @return
 		 */
-		NodeCount nc = new NodeCount();
-		updateCount(nc, root);
-		return nc.avg();
-	}
+		public static int getClosestToZero(int[] a) {
+			/*
+			 * Please implement this method to return the number in the array that
+			 * is closest to zero. If there are two equally close to zero elements
+			 * like 2 and -2 - consider the positive element to be "closer" to zero.
+			 */
+			int closet = Integer.MAX_VALUE;
+			for (int i = 0; i < a.length; i++) {
+				closet = (Math.abs(a[i]) < Math.abs(closet)) ? a[i] : (Math.abs(a[i]) == Math.abs(closet) && a[i]>0 ? a[i] : closet);					
+			}
+			return closet;
+		}
 
 }
