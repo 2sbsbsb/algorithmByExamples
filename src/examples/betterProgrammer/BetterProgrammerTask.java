@@ -25,5 +25,4 @@ public class BetterProgrammerTask {
 		System.out.println(Arrays.toString(a));	
 		System.out.println(getClosestToZero(a));
 	}
-
 }
