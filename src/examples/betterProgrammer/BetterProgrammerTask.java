@@ -4,81 +4,78 @@ import java.util.*;
 
 public class BetterProgrammerTask {
 
-	// Please do not change this interface
-	interface ListNode {
-		int getItem();
-
-		ListNode getNext();
-
-		void setNext(ListNode next);
-	}
-
-	public static class ListNodeImpl implements ListNode {
-		int value;
-		ListNode next;
-
-		public ListNodeImpl(int value) {
-			this.value = value;
+	public static List<Integer> getReversalsToSort(int[] a) {
+		/*
+		 * You need to sort an array of integers by repeatedly reversing the
+		 * order of the first several elements of it.
+		 * 
+		 * For example, to sort [12,13,11,14], you need to reverse the order of
+		 * the first two (2) elements and get [13,12,11,14] and then reverse the
+		 * order of the first three (3) elements and get [11,12,13,14]
+		 * 
+		 * The method should return the shortest(!) possible list of integers
+		 * corresponding to the required reversals. For the previous example,
+		 * given an array [12,13,11,14] the method should return a list with
+		 * Integers 2 and 3.
+		 */
+		List<Integer> results = new ArrayList<Integer>();
+		int lastIndex = a.length - 1;
+		for (int i = lastIndex; i > 0; i--) {
+			int maxIndex = maxIndex(a, i);
+			// if the maxIndex is already sorted the do not sorts
+			if (maxIndex != i) {
+				if (maxIndex != 0) {
+					flip(a, maxIndex);
+					results.add(maxIndex + 1);
+				}
+				flip(a, i);
+				results.add(i+1);
+			}
 		}
-
-		@Override
-		public int getItem() {
-			// TODO Auto-generated method stub
-			return value;
-		}
-
-		@Override
-		public ListNode getNext() {
-			return next;
-		}
-
-		@Override
-		public void setNext(ListNode next) {
-			this.next = next;
-		}
-
-		@Override
-		public String toString() {
-			return "ListNodeImpl [value=" + value + ", next=" + next + "]";
-		}
-
+		return results;
 	}
 
 	/**
-	 * @param node
+	 * Flip this array from index 0 to endIndex
+	 * 
+	 * @param array
+	 * @param maxIndex
+	 */
+	public static void flip(int[] array, int endIndex) {
+		int startIndex = 0;
+		while (startIndex < endIndex) {
+			int temp = array[endIndex];
+			array[endIndex] = array[startIndex];
+			array[startIndex] = temp;
+			startIndex++;
+			endIndex--;
+		}
+	}
+
+	/**
+	 * @param a
+	 * @param index
 	 * @return
 	 */
-	public static ListNode reverse(ListNode node) {
-		/*
-		 * Please implement this method to reverse a given linked list.
-		 */
-		ListNode previous = null;
-		ListNode next = node;
-		while (next != null) {
-			ListNode temp = next.getNext();
-			next.setNext(previous);
-			previous = next;
-			next = temp;
+	public static int maxIndex(int[] a, int index) {
+		int max = 0;
+		for (int i = 0; i <= index; i++) {
+			if (a[i] > a[max]) {
+				max = i;
+			}
 		}
-		return next;
+		return max;
 	}
 
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		ListNode L4 = new ListNodeImpl(4);
-		ListNode L3 = new ListNodeImpl(3);
-		ListNode L2 = new ListNodeImpl(2);
-		ListNode L1 = new ListNodeImpl(1);
-		L1.setNext(L2);
-		L2.setNext(L3);
-		L3.setNext(L4);
-		System.out.println(L1);
-		System.out.println(L4);
-		reverse(L1);
-		System.out.println(L1);
-		System.out.println(L4);
+		int[] a = { 12, 13, 11, 14 };
+		List<Integer> results = getReversalsToSort(a);
+		for (Integer r : results) {
+			System.out.println(r);
+		}
 	}
 
 }
