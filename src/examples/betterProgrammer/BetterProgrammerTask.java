@@ -1,24 +1,30 @@
 package examples.betterProgrammer;
 
-
 public class BetterProgrammerTask {
 
-	public static int getCountOfOnes(int n) {
-        /*
-         Please implement this method to
-         return the number of '1's in the binary representation of n
-         for any integer n, where n > 0
-
-         Example: for n=6 the binary representation is '110' and the number of '1's in that 
-         representation is 2
-
-        */		
-		int sum =0;
-		while(n!=0) {
-			n &= (n-1);
-			sum++;
+	public static int getSumOfNumbers(String s) {
+		/*
+		 * Please implement this method to return the sum of all integers found
+		 * in the parameter String. You can assume that integers are separated
+		 * from other parts with one or more spaces (' ' symbol). For example,
+		 * s="12 some text 3  7", result: 22 (12+3+7=22)
+		 */
+		String[] values = s.split(" ");
+		int sum = 0;
+		for(String value : values) {
+			int val = 0;
+			try {
+				val = Integer.parseInt(value);
+			} catch(Exception ex) {
+				
+			}
+			sum+=val;
 		}
 		return sum;
-    }
+	}
+
+	public static void main(String[] args) {
+		System.out.println(getSumOfNumbers("12 some text 3  7"));
+	}
 
 }
