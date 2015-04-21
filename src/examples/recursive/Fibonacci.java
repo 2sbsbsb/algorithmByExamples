@@ -7,6 +7,8 @@ public class Fibonacci {
 	}
 	
 	/**
+	 * Write a method to generate the nth Fibonacci number
+	 * 
 	 * @param n
 	 * @return
 	 */
@@ -19,7 +21,24 @@ public class Fibonacci {
 			return fib (n-1) + fib(n-2);
 		}
 	}
-
+	
+	/**
+	 * @param n
+	 * @return
+	 */
+	public static int fibIterative(int n) {
+		if(n==0){
+			return 0; 
+		} 
+		int a=1;
+		int b=1;
+		for(int i=3;i<n;i++) {
+			int c= a+b;
+			a = b;
+			b = c;			
+		}
+		return b;
+	}
 	
 	/**
 	 * @param args
