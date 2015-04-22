@@ -4,27 +4,32 @@ import java.util.*;
 
 public class BetterProgrammerTask {
 
-	public static int[] retainPositiveNumbers(int[] a) {
+	public static String reverseWords(String s) {
 		/*
-		 * Please implement this method to return a new array with only positive
-		 * numbers from the given array. The elements in the resulting array
-		 * shall be sorted in the ascending order.
+		 * Assume that the parameter String can only contain spaces and
+		 * alphanumeric characters. Please implement this method to reverse each
+		 * word in the original String while maintaining the word order. For
+		 * example: parameter: "Hello world", result: "olleH dlrow"
 		 */
-		List<Integer> results = new ArrayList<Integer>();
-		for (int aa : a) {
-			if (aa > 0) {
-				results.add(aa);
+		StringBuilder sb = new StringBuilder();
+		if (s != null) {
+			String[] values = s.split(" ");
+			for(String value : values) {
+				char[] chars = value.toCharArray();
+				for(int i=chars.length-1;i>=0;i--) {
+					sb.append(chars[i]);
+				}
+				sb.append(" ");
 			}
 		}
-		int[] values = new int[results.size()];
-		for (int i = 0; i < results.size(); i++) {
-			values[i] = results.get(i);
-		}
-		return values;
+		return sb.toString();
 	}
-
+	
+	/**
+	 * @param args
+	 */
 	public static void main(String[] args) {
-		System.out.println(Arrays.toString(retainPositiveNumbers(new int [] {1,2,-5,1,4})));
+		System.out.println(reverseWords("Hello World"));
 	}
 
 }
