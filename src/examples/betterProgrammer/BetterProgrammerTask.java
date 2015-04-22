@@ -4,32 +4,48 @@ import java.util.*;
 
 public class BetterProgrammerTask {
 
-	public static String reverseWords(String s) {
+	// Please do not change this interface
+	public static interface Node {
+		int getValue();
+
+		List<Node> getChildren();
+	}
+
+	static double sum;
+	static int count;
+
+	public static double getAverage(Node root) {
 		/*
-		 * Assume that the parameter String can only contain spaces and
-		 * alphanumeric characters. Please implement this method to reverse each
-		 * word in the original String while maintaining the word order. For
-		 * example: parameter: "Hello world", result: "olleH dlrow"
+		 * Please implement this method to return the average of all node values
+		 * (Node.getValue()) in the tree.
 		 */
-		StringBuilder sb = new StringBuilder();
-		if (s != null) {
-			String[] values = s.split(" ");
-			for(String value : values) {
-				char[] chars = value.toCharArray();
-				for(int i=chars.length-1;i>=0;i--) {
-					sb.append(chars[i]);
+		calculateSumCount(root);
+		return sum / (double) count;
+	}
+
+	/**
+	 * @param node
+	 * @param sum
+	 * @param count
+	 */
+	public static void calculateSumCount(Node node) {
+		if (node != null) {
+			sum += node.getValue();
+			count++;
+			List<Node> childrens = node.getChildren();
+			if (childrens != null) {
+				for (Node child : childrens) {
+					calculateSumCount(child);
 				}
-				sb.append(" ");
 			}
 		}
-		return sb.toString();
 	}
-	
+
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		System.out.println(reverseWords("Hello World"));
+		
 	}
 
 }
